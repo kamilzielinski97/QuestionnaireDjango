@@ -1,0 +1,25 @@
+{% extends 'ankieta/base.html' %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Zapraszamy do wykonania ankiet</h1>
+      
+    </div>
+  </div>
+
+
+{% if ostatnie_ankiety %}
+
+    <ul>
+        {% for pytanie in ostatnie_ankiety  %}
+            <li><a href="{% url 'szczegoly' pytanie.id %}" >
+                {{pytanie.tekst_pytanie }}</a> </li>
+        {%endfor%}
+
+    </ul>
+{% else %}
+        <p>Nie ma ankiet w tym zakresie dat</p>
+{% endif %}
+
+{% endblock %}

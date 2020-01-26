@@ -1,0 +1,11 @@
+{% extends 'ankieta/base.html' %}
+{% block content %}
+<h1>{{ pytanie.tekst_pytanie}}</h1>
+<u1>
+    {% for odp in pytanie.odpowiedz_set.all  %}
+        <li> {{ odp.tekst_odpowiedz }} -- {{ odp.glosy }} glosuje{{ odp.glosy|pluralize }}</li>
+    {%endfor%}
+    </u1>
+    <center> <a href="{% url 'szczegoly' pytanie.id %}">
+    <button type="button" class="btn btn-primary">Zaglosujesz jeszcze raz?</button> </a> </center>
+{% endblock %}

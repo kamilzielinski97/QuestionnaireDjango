@@ -1,0 +1,40 @@
+{% extends 'ankieta/base.html' %}
+{% block content %}
+<div class="container">
+</div><h1>{{ pytanie.tekst_pytanie }} z dnia {{ pytanie.data_publikowacji }}</h1></div>
+
+    <div class="row">
+      <div class="col-sm">
+    
+      </div>
+      <div class="col-sm">
+       
+
+        {% if error_message %}<p><strong>{{error_message}} </strong></p>{% endif %}
+
+        <form action="{% url 'glosuj' pytanie.id %}" method="POST">
+            {% csrf_token %}
+            {% for odp in pytanie.odpowiedz_set.all %}
+                <input type="radio" name="odp" id="odp{{ forloop.counter }}" value="{{ odp.id}}">
+                <label for="odp{{ forloop.counter }}">{{ odp.tekst_odpowiedzi}}</label>
+                <br>
+            {% endfor %}
+           <button type= "submit" class="btn btn-success">Głosuj</button>
+        </form>
+
+
+
+      </div>
+      <div class="col-sm">
+        
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+
+
+<!-- <ul>
+    {% for odpow in pytanie.odpowiedz_set.all %}
+    <li> {{ odpow.tekst_odpowiedzi }} </li>
+    {% endfor %}
+</ul> -->
